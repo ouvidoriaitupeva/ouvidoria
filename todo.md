@@ -1,5 +1,13 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Ajuste de linguagem institucional
+
+- [ ] Remover “Painel da Ouvidoria Municipal”.
+- [ ] Remover “O que a população está dizendo?”.
+- [ ] Remover “Onde a resolutividade pode melhorar”.
+- [ ] Substituir os três títulos por nomenclatura neutra e institucional.
+- [ ] Validar compilação e salvar novo checkpoint.
+
 ## Revisão visual e de indicadores — Itupeva + Resolveu?
 
 - [ ] Consultar a identidade oficial de Itupeva e a estrutura visual do painel Resolveu? da CGU.
