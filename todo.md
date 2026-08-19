@@ -1,5 +1,18 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Páginas e navegação
+
+- [ ] Remover o quadro “Resumo dos indicadores / Acompanhamento por secretaria”.
+- [ ] Criar rota de registro de manifestação.
+- [ ] Criar página de relatórios por secretaria.
+- [ ] Criar página de metas e prazos.
+- [ ] Criar página de secretarias oficiais.
+- [ ] Criar página de dicionário de indicadores.
+- [ ] Conectar todos os itens do menu às páginas correspondentes.
+- [ ] Validar navegação, formulário e responsividade.
+- [ ] Salvar checkpoint da versão completa.
+
+
 ## Ampliação Resolveu? e ajuste do cabeçalho
 
 - [ ] Levantar indicadores adicionais do painel Resolveu? da CGU.
