@@ -1,5 +1,14 @@
 # Atualização — Ouvidoria de Itupeva
 
+## GitHub Pages
+
+- [ ] Identificar o repositório remoto e a branch publicada.
+- [ ] Verificar se os arquivos atuais estão sincronizados no GitHub.
+- [ ] Verificar workflows e configuração do GitHub Pages.
+- [ ] Corrigir build, base path ou publicação, se necessário.
+- [ ] Validar a URL publicada e informar a diferença para a hospedagem integrada.
+
+
 ## Lateral
 
 - [ ] Remover o bloco “Visão institucional”.
