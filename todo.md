@@ -1,5 +1,11 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Ordem dos blocos
+
+- [ ] Mover “Assuntos” para o último bloco da visão geral.
+- [ ] Validar a ordem visual e salvar checkpoint.
+
+
 ## Barra superior e assuntos
 
 - [ ] Remover “Painel de fiscalização” da barra superior.

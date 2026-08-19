@@ -1,0 +1,12 @@
+import fs from "node:fs";
+const path = "/home/ubuntu/falabr-facil/client/src/pages/Home.tsx";
+const source = fs.readFileSync(path, "utf8");
+const start = source.indexOf('<section className="mt-7 rounded-2xl border border-[#E4DED2] bg-white/75 p-6"><div className="flex items-start justify-between gap-4"><div><h2 className="font-display text-2xl font-semibold">Assuntos</h2>');
+const next = source.indexOf('<section className="mt-7 rounded-2xl border border-[#E4DED2] bg-white/75 p-6"><div className="flex items-end justify-between">', start);
+if (start < 0 || next < 0) throw new Error("Bloco de Assuntos não localizado");
+const assuntos = source.slice(start, next);
+const without = source.slice(0, start) + source.slice(next);
+const end = without.indexOf('</div></OuvidoriaLayout>;');
+if (end < 0) throw new Error("Final do layout não localizado");
+const updated = without.slice(0, end) + assuntos + without.slice(end);
+fs.writeFileSync(path, updated);
