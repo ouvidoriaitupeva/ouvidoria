@@ -1,5 +1,14 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Ampliação Resolveu? e ajuste do cabeçalho
+
+- [ ] Levantar indicadores adicionais do painel Resolveu? da CGU.
+- [ ] Remover o título “Indicadores por secretaria”.
+- [ ] Manter “Ouvidoria de Itupeva” e o texto introdutório definido pelo usuário.
+- [ ] Incorporar indicadores agregados adicionais sem mostrar manifestações.
+- [ ] Validar a nova composição e salvar checkpoint.
+
+
 ## Ajuste de linguagem institucional
 
 - [ ] Remover “Painel da Ouvidoria Municipal”.
