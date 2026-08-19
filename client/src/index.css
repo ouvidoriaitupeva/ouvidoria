@@ -37,26 +37,26 @@
 
 :root {
   --radius: 0.75rem;
-  --primary: oklch(0.31 0.07 245);
+  --primary: oklch(0.37 0.12 255);
   --primary-foreground: oklch(0.98 0.02 95);
-  --background: oklch(0.972 0.009 95);
-  --foreground: oklch(0.31 0.07 245);
+  --background: oklch(0.975 0.012 185);
+  --foreground: oklch(0.34 0.09 255);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.31 0.07 245);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.31 0.07 245);
-  --secondary: oklch(0.94 0.015 190);
+  --secondary: oklch(0.93 0.05 170);
   --secondary-foreground: oklch(0.31 0.07 245);
   --muted: oklch(0.94 0.012 95);
   --muted-foreground: oklch(0.55 0.03 215);
-  --accent: oklch(0.92 0.07 90);
+  --accent: oklch(0.9 0.13 88);
   --accent-foreground: oklch(0.31 0.07 245);
   --destructive: oklch(0.58 0.19 28);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.89 0.02 210);
   --input: oklch(0.89 0.02 210);
-  --ring: oklch(0.68 0.08 195);
-  --sidebar: oklch(0.972 0.009 95);
+  --ring: oklch(0.66 0.11 195);
+  --sidebar: oklch(0.965 0.025 180);
   --sidebar-foreground: oklch(0.31 0.07 245);
   --sidebar-accent: oklch(0.94 0.03 210);
   --sidebar-accent-foreground: oklch(0.31 0.07 245);
@@ -66,7 +66,7 @@
 
 @layer base {
   * { @apply border-border outline-ring/50; }
-  html { font-family: "Public Sans", sans-serif; background: #f7f5f0; }
+  html { font-family: "Public Sans", sans-serif; background: #f4f8f8; }
   body { @apply bg-background text-foreground; margin: 0; }
   button:not(:disabled), a[href], select:not(:disabled), input:not(:disabled), textarea:not(:disabled) { cursor: pointer; }
   button, a, input, select, textarea { transition: color 180ms ease-out, background-color 180ms ease-out, border-color 180ms ease-out, box-shadow 180ms ease-out, transform 180ms ease-out; }
