@@ -2,6 +2,12 @@
 
 ## Formulário de registro
 
+- [ ] Mover a identificação para a última etapa do formulário.
+- [ ] Tornar a identificação opcional, sem exigir nome, documento ou contato.
+- [ ] Oferecer login gov.br somente como opção de identificação no final.
+- [ ] Manter a possibilidade de concluir sem identificação.
+
+
 - [ ] Trocar “Título curto” por “Assunto”.
 - [ ] Incluir identificação do local da ocorrência.
 - [ ] Criar escolha entre manifestação identificada e não identificada.
