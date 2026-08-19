@@ -1,5 +1,12 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Lateral
+
+- [ ] Remover o bloco “Visão institucional”.
+- [ ] Deixar a lateral sem texto promocional ou institucional nessa área.
+- [ ] Validar o espaçamento do menu e salvar checkpoint.
+
+
 ## Formulário de registro
 
 - [ ] Mover a identificação para a última etapa do formulário.
