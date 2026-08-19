@@ -1,5 +1,13 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Barra superior e assuntos
+
+- [ ] Remover “Painel de fiscalização” da barra superior.
+- [ ] Remover “Ouvidoria Municipal”, “Acesso institucional” e “OM”.
+- [ ] Incluir quadro agregado de assuntos na visão geral.
+- [ ] Validar layout e salvar checkpoint.
+
+
 ## Páginas e navegação
 
 - [ ] Remover o quadro “Resumo dos indicadores / Acompanhamento por secretaria”.
