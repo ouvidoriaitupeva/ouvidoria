@@ -1,5 +1,16 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Formulário de registro
+
+- [ ] Trocar “Título curto” por “Assunto”.
+- [ ] Incluir identificação do local da ocorrência.
+- [ ] Criar escolha entre manifestação identificada e não identificada.
+- [ ] Incluir campos de nome, documento, e-mail e telefone quando a pessoa optar por se identificar.
+- [ ] Incluir opção de usar localização do dispositivo com permissão do navegador.
+- [ ] Explicar que preenchimento automático real exige autenticação e integração segura.
+- [ ] Validar o formulário e salvar checkpoint.
+
+
 ## Ordem dos blocos
 
 - [ ] Mover “Assuntos” para o último bloco da visão geral.
