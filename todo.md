@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Resolutividade e prazo
+
+- [ ] Calcular Índice de resolutividade como concluídos ÷ protocolos registrados.
+- [ ] Exibir o valor no período selecionado e após o upload da planilha.
+- [ ] Confirmar regra oficial de prazo/SLA.
+- [ ] Se autorizado, calcular proxy de prazo usando concluídos sem prorrogação ÷ concluídos.
+- [ ] Manter a satisfação média apagada/em cinza.
+- [ ] Validar e salvar checkpoint.
+
+
 ## Barras de tipos de manifestação
 
 - [ ] Limitar cada barra à largura da própria coluna.
