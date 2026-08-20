@@ -2,6 +2,12 @@
 
 ## SIC, Ouvidoria institucional e configurações
 
+## Banners de acolhimento e inclusão
+- [x] Adicionar banner de combate à discriminação racial.
+- [x] Adicionar banner de atendimento à pessoa com deficiência.
+- [x] Manter o banner de Denúncia de Violência contra Mulheres e organizar os três juntos.
+- [x] Validar a página institucional e publicar novo checkpoint.
+
 ## Fluxo federal do SIC e conclusão da Ouvidoria
 - [x] Adicionar área inicial com Fazer pedido e Ver meus pedidos.
 - [x] Adicionar escolha entre informação pública, pessoal e de outra pessoa.
