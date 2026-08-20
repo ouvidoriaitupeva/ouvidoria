@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Correções de fluxo, relatórios e Carta de Serviços
+- [x] Adicionar campo para acompanhar pedido em Registrar manifestação.
+- [x] Remover os textos introdutórios solicitados de Registrar manifestação.
+- [x] Deixar a página SIC apenas com “Enviar uma nova solicitação”.
+- [x] Retirar textos introdutórios dos Relatórios por secretaria.
+- [x] Restaurar os dados disponíveis nos Relatórios por secretaria.
+- [x] Separar a Carta de Serviços por secretaria.
+- [x] Validar todas as páginas e publicar novo checkpoint.
+
+
 ## Ajustes solicitados no menu, relatórios e Carta de Serviços
 - [x] Trocar o ícone do Cadastrar pedido SIC para o sinal de +.
 - [x] Remover Metas e prazos e Dicionário de indicadores do menu e suas rotas acessíveis.
