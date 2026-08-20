@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Revisão da visão geral
+
+- [ ] Remover “Painel de indicadores”.
+- [ ] Adicionar períodos: últimos 12 meses, últimos 6 meses, este mês e período personalizado.
+- [ ] Renomear “Registros avaliados” para “Protocolos registrados”.
+- [ ] Remover subtítulos e tags auxiliares solicitados: “Distribuição percentual no período.”, “Agregado”, “Total mensal, sem identificação individual.”, “Registros agregados”, “Comparativo agregado para apoiar a fiscalização.”, “Distribuição agregada dos temas registrados no período.” e “Sem identificação”.
+- [ ] Criar seletor colorido para “Concluídos”, “Abertos” e “Registrados” em Evolução dos registros.
+- [ ] Validar a página e salvar checkpoint.
+
+
 ## GitHub Pages
 
 - [ ] Identificar o repositório remoto e a branch publicada.
