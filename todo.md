@@ -2,6 +2,12 @@
 
 ## SIC, Ouvidoria institucional e configurações
 
+## Simplificação solicitada do SIC
+- [x] Remover da página SIC os blocos Base legal e proteção de dados, Tipos de informação, Identificação é opcional e Canais e responsáveis.
+- [x] Manter somente o formulário de cadastro do pedido em uma única página.
+- [x] Manter identificação opcional no final do formulário.
+- [x] Validar e publicar a página simplificada.
+
 ## Correção da estrutura do SIC
 - [x] Manter o SIC em rota/página separada da Ouvidoria.
 - [x] Exibir todas as solicitações do cadastro na mesma página.
