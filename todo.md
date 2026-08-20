@@ -1,5 +1,14 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Nova Carta de Serviços ao Usuário
+- [x] Estruturar o conteúdo anexado por secretaria, setor e serviço.
+- [x] Criar página própria com busca, filtro por secretaria e cartões detalhados.
+- [x] Adicionar a Carta de Serviços ao menu da aplicação.
+- [x] Preservar o aviso de versão inicial e validação pelos órgãos responsáveis.
+- [x] Validar conteúdo, busca, filtros e responsividade.
+- [ ] Salvar checkpoint publicado.
+
+
 ## Nova ordem da página institucional
 - [x] Ordenar seções: canais, manifestações, três banners, SIC, protocolos/LGPD, Nossa Equipe, documentos e base legal.
 - [x] Destacar o responsável pelos dados pessoais como DPO no bloco Protocolos, sigilo e LGPD.
