@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Secretarias e assuntos ampliados
+
+- [ ] Permitir rolagem no bloco de Desempenho por secretaria.
+- [ ] Exibir Concluídos, Abertos e Registrados por secretaria.
+- [ ] Permitir rolagem no bloco de Assuntos.
+- [ ] Exibir Concluídos, Abertos e Registrados por assunto.
+- [ ] Calcular os três status usando o mesmo período selecionado.
+- [ ] Validar desktop e mobile e salvar checkpoint.
+
+
 ## Correção da contagem de assuntos
 
 - [ ] Comparar soma dos assuntos com protocolos registrados no mesmo período.
