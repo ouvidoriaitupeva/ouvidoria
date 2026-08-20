@@ -1,5 +1,12 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Nova ordem da página institucional
+- [x] Ordenar seções: canais, manifestações, três banners, SIC, protocolos/LGPD, Nossa Equipe, documentos e base legal.
+- [x] Destacar o responsável pelos dados pessoais como DPO no bloco Protocolos, sigilo e LGPD.
+- [x] Renomear Equipe da Ouvidoria para Nossa Equipe.
+- [x] Destacar a nota de acessibilidade e fonte no final da página.
+- [x] Validar e publicar novo checkpoint.
+
 ## SIC, Ouvidoria institucional e configurações
 
 ## Banners de acolhimento e inclusão
