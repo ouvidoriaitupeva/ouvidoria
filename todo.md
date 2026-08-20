@@ -1,5 +1,13 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Estado dos indicadores
+
+- [ ] Manter somente “Satisfação média” apagada/em cinza.
+- [ ] Reativar “Índice de resolutividade”.
+- [ ] Reativar “Dentro do prazo”.
+- [ ] Validar e salvar checkpoint.
+
+
 ## XLSX local e privacidade
 
 - [ ] Não publicar a planilha original com dados pessoais.
