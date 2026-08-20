@@ -2,6 +2,16 @@
 
 ## SIC, Ouvidoria institucional e configurações
 
+## Fluxo federal do SIC e conclusão da Ouvidoria
+- [x] Adicionar área inicial com Fazer pedido e Ver meus pedidos.
+- [x] Adicionar escolha entre informação pública, pessoal e de outra pessoa.
+- [x] Adicionar órgão/secretaria de destino obrigatório com busca/lista.
+- [x] Adicionar descrição do pedido com contador até 8.000 caracteres.
+- [x] Adicionar anexos com formatos permitidos e limite de 30 MB por arquivo.
+- [x] Adicionar resumo do pedido antes do envio e tela de conclusão.
+- [x] Completar a página de registro da Ouvidoria com resumo, anexos e conclusão.
+- [x] Validar os dois fluxos e publicar novo checkpoint.
+
 ## Simplificação solicitada do SIC
 - [x] Remover da página SIC os blocos Base legal e proteção de dados, Tipos de informação, Identificação é opcional e Canais e responsáveis.
 - [x] Manter somente o formulário de cadastro do pedido em uma única página.
