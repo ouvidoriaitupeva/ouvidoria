@@ -1,5 +1,13 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Filtros de status
+
+- [ ] Padronizar opções: Concluídos, Abertos e Registrados.
+- [ ] Usar Registrados como seleção padrão.
+- [ ] Alterar o padrão inicial da Evolução dos registros para Registrados.
+- [ ] Validar interação e salvar checkpoint.
+
+
 ## Secretarias e assuntos ampliados
 
 - [ ] Permitir rolagem no bloco de Desempenho por secretaria.
