@@ -1,5 +1,13 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Barras de tipos de manifestação
+
+- [ ] Limitar cada barra à largura da própria coluna.
+- [ ] Remover a largura multiplicada que causa invasão da coluna vizinha.
+- [ ] Validar em desktop e mobile.
+- [ ] Salvar checkpoint.
+
+
 ## Estado dos indicadores
 
 - [ ] Manter somente “Satisfação média” apagada/em cinza.
