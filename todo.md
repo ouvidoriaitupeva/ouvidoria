@@ -1,5 +1,14 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Auditoria da planilha-fonte
+
+- [ ] Mapear colunas, preenchimento e tipos de dados da planilha.
+- [ ] Calcular totais por status, categoria, secretaria e período.
+- [ ] Comparar esses totais com metricas.json.
+- [ ] Identificar registros, datas ou campos que causem discrepâncias.
+- [ ] Corrigir a fonte temporária com números reconciliados.
+- [ ] Informar campos vazios ou inconsistentes que dependem de saneamento.
+
 ## Auditoria de divergência dos dados
 
 - [ ] Comparar o total exibido com os totais por campo do JSON.
