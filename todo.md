@@ -2,6 +2,12 @@
 
 ## SIC, Ouvidoria institucional e configurações
 
+## Ampliação solicitada
+- [x] Reunir todo o conteúdo oficial disponível para a página Informações da Ouvidoria.
+- [x] Transformar Cadastro do SIC em página institucional completa, sem fluxo fragmentado.
+- [x] Incluir no SIC canais, finalidade, categorias, prazos, recursos, identificação opcional, sigilo, LGPD, responsáveis e base legal.
+- [x] Validar as duas páginas em desktop e mobile e salvar novo checkpoint.
+
 - [x] Consultar a página oficial da Ouvidoria de Itupeva.
 - [x] Criar página Cadastro do SIC conforme a LAI.
 - [x] Adicionar Cadastro do SIC ao menu.
