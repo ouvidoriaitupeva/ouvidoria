@@ -2,6 +2,13 @@
 
 ## SIC, Ouvidoria institucional e configurações
 
+## Correção da estrutura do SIC
+- [x] Manter o SIC em rota/página separada da Ouvidoria.
+- [x] Exibir todas as solicitações do cadastro na mesma página.
+- [x] Remover etapas numeradas e qualquer botão Avançar/Continuar.
+- [x] Manter identificação opcional somente no final do formulário.
+- [x] Validar o formulário contínuo em desktop e mobile e salvar checkpoint.
+
 ## Ampliação solicitada
 - [x] Reunir todo o conteúdo oficial disponível para a página Informações da Ouvidoria.
 - [x] Transformar Cadastro do SIC em página institucional completa, sem fluxo fragmentado.
