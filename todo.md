@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Ajustes solicitados no menu, relatórios e Carta de Serviços
+- [x] Trocar o ícone do Cadastrar pedido SIC para o sinal de +.
+- [x] Remover Metas e prazos e Dicionário de indicadores do menu e suas rotas acessíveis.
+- [x] Renomear Secretarias oficiais para Secretarias.
+- [x] Remover o título Fontes e orientação.
+- [x] Garantir que Relatórios por secretaria liste todas as secretarias disponíveis.
+- [x] Melhorar a Carta de Serviços com serviços individualizados, campos legíveis e navegação por serviço.
+- [x] Validar todas as mudanças em desktop e mobile e salvar checkpoint.
+
+
 ## Nova Carta de Serviços ao Usuário
 - [x] Estruturar o conteúdo anexado por secretaria, setor e serviço.
 - [x] Criar página própria com busca, filtro por secretaria e cartões detalhados.
