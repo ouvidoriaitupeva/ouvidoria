@@ -1,5 +1,19 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Dados temporários via metricas.json
+
+- [ ] Comparar o arquivo com os indicadores exibidos e listar lacunas.
+- [ ] Informar ao usuário qualquer métrica ausente antes da entrega.
+
+
+- [ ] Ler a estrutura e os nomes dos campos do arquivo enviado.
+- [ ] Copiar o arquivo para a fonte estática do projeto.
+- [ ] Alimentar KPIs e blocos da visão geral com os dados do arquivo.
+- [ ] Manter satisfação média visível, cinza e sem valor enquanto não houver dado.
+- [ ] Tratar ausência de campos sem quebrar a página.
+- [ ] Validar a leitura e salvar checkpoint.
+
+
 ## Revisão da visão geral
 
 - [ ] Remover “Painel de indicadores”.
