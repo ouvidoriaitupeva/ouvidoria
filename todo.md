@@ -1,5 +1,14 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Correção da contagem de assuntos
+
+- [ ] Comparar soma dos assuntos com protocolos registrados no mesmo período.
+- [ ] Corrigir o índice dos assuntos entre meses e períodos.
+- [ ] Não exibir soma de assuntos maior que o total de protocolos.
+- [ ] Validar períodos de 12 meses, 6 meses, mês e personalizado.
+- [ ] Salvar checkpoint.
+
+
 ## Dentro do prazo — proxy transparente
 
 - [ ] Calcular concluídos sem prorrogação ÷ concluídos.
