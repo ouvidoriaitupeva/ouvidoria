@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import OuvidoriaLayout from "@/components/OuvidoriaLayout";
 import { BarChart3, Check, Clock3, ShieldCheck, Target } from "lucide-react";
 
-type DailyRow = { f?: number; c?: number; cat?: number[] };
+type DailyRow = { f?: number; fab?: number; fcc?: number; fcn?: number; c?: number; cat?: number[] };
 type Metrics = { meta?: { gerado_em?: string; janela_inicio?: string; janela_fim?: string; categorias?: string[]; secretarias?: string[]; assuntos?: string[] }; diario?: Record<string, DailyRow>; mensal_dim?: Record<string, { sec?: { reg?: number[]; cc?: number[] }; ass?: { reg?: number[] } }>; abertos_mais_30d?: { total?: number } };
 const colors = ["#00549D", "#0A8F4D", "#D94736", "#F0C433", "#35A8C6", "#7B6BB2", "#D78B1D", "#7B8A91"];
 function formatNumber(value: number) { return new Intl.NumberFormat("pt-BR").format(value); }
@@ -26,14 +26,14 @@ export default function Home() {
   const selectedDates = allDates.filter((date) => date >= range.start && date <= range.end);
   const rows = selectedDates.map((date) => daily[date]).filter(Boolean);
   const registered = rows.reduce((sum, row) => sum + Number(row.f ?? 0), 0);
-  const concluded = rows.reduce((sum, row) => sum + Number(row.c ?? 0), 0);
-  const open = Number(data?.abertos_mais_30d?.total ?? 0);
+  const concluded = rows.reduce((sum, row) => sum + Number(row.fcc ?? 0), 0);
+  const open = rows.reduce((sum, row) => sum + Number(row.fab ?? 0), 0);
   const categories = data?.meta?.categorias ?? [];
   const categoryTotals = categories.map((_, index) => rows.reduce((sum, row) => sum + Number(row.cat?.[index] ?? 0), 0));
   const categoryTotal = categoryTotals.reduce((sum, value) => sum + value, 0);
   const types = categories.map((label, index) => [label, categoryTotal ? Math.round((categoryTotals[index] / categoryTotal) * 100) : 0, colors[index] ?? "#7B8A91"] as const).sort((a, b) => b[1] - a[1]);
-  const months = useMemo(() => { const monthMap = new Map<string, { registered: number; concluded: number }>(); selectedDates.forEach((date) => { const key = date.slice(0, 7); const row = daily[date]; const current = monthMap.get(key) ?? { registered: 0, concluded: 0 }; current.registered += Number(row?.f ?? 0); current.concluded += Number(row?.c ?? 0); monthMap.set(key, current); }); return Array.from(monthMap.entries()).slice(-12); }, [selectedDates.join("|"), data]);
-  const evolutionValues = months.map(([, values]) => selectedSeries === "Concluídos" ? values.concluded : selectedSeries === "Abertos" ? Math.max(values.registered - values.concluded, 0) : values.registered);
+  const months = useMemo(() => { const monthMap = new Map<string, { registered: number; concluded: number; open: number }>(); selectedDates.forEach((date) => { const key = date.slice(0, 7); const row = daily[date]; const current = monthMap.get(key) ?? { registered: 0, concluded: 0, open: 0 }; current.registered += Number(row?.f ?? 0); current.concluded += Number(row?.fcc ?? 0); current.open += Number(row?.fab ?? 0); monthMap.set(key, current); }); return Array.from(monthMap.entries()).slice(-12); }, [selectedDates.join("|"), data]);
+  const evolutionValues = months.map(([, values]) => selectedSeries === "Concluídos" ? values.concluded : selectedSeries === "Abertos" ? values.open : values.registered);
   const maxEvolution = Math.max(...evolutionValues, 1);
   const secretarias = data?.meta?.secretarias ?? [];
   const secretariatRows = secretarias.map((name, index) => { let reg = 0; let cc = 0; selectedDates.forEach((date) => { const month = data?.mensal_dim?.[date.slice(0, 7)]; reg += Number(month?.sec?.reg?.[index] ?? 0); cc += Number(month?.sec?.cc?.[index] ?? 0); }); return { name, reg, cc }; }).filter((row) => row.reg > 0).sort((a, b) => b.reg - a.reg).slice(0, 6);

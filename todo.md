@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Auditoria de divergência dos dados
+
+- [ ] Comparar o total exibido com os totais por campo do JSON.
+- [ ] Confirmar a semântica de f, c, fab, fcc e fcn.
+- [ ] Confirmar a janela padrão usada pelo arquivo e pelo dashboard.
+- [ ] Verificar se “c” é concluído, cadastro, consulta ou outra dimensão.
+- [ ] Corrigir somente os indicadores com definição confirmada.
+- [ ] Informar claramente as métricas que exigem definição da Ouvidoria.
+
+
 ## Dados temporários via metricas.json
 
 - [ ] Comparar o arquivo com os indicadores exibidos e listar lacunas.
