@@ -2,6 +2,12 @@
 
 ## SIC, Ouvidoria institucional e configurações
 
+## Ajuste dos banners de acolhimento
+- [x] Remover o título e o texto “Acolhimento e proteção”.
+- [x] Colocar os três banners juntos no mesmo bloco.
+- [x] Renomear para “Denúncia de Violência contra Mulheres”.
+- [x] Validar e publicar novo checkpoint.
+
 ## Banners de acolhimento e inclusão
 - [x] Adicionar banner de combate à discriminação racial.
 - [x] Adicionar banner de atendimento à pessoa com deficiência.
