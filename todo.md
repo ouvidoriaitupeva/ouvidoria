@@ -1,5 +1,24 @@
 # Atualização — Ouvidoria de Itupeva
 
+## XLSX local e privacidade
+
+- [ ] Não publicar a planilha original com dados pessoais.
+- [ ] Criar botão para carregar o XLSX somente no navegador.
+- [ ] Recalcular os indicadores após o upload local.
+- [ ] Exibir aviso de que o arquivo não é enviado ao servidor.
+- [ ] Validar o painel com e sem arquivo carregado.
+
+
+## Integração direta da planilha XLSX
+
+- [ ] Verificar tamanho e estrutura da planilha para uso no navegador.
+- [ ] Incluir o XLSX como fonte direta do frontend.
+- [ ] Ler as linhas originais no navegador e aplicar os filtros de período.
+- [ ] Recalcular protocolos, status, categorias, secretarias e assuntos diretamente das linhas.
+- [ ] Validar divergências contra a planilha original.
+- [ ] Salvar checkpoint da integração.
+
+
 ## Auditoria da planilha-fonte
 
 - [ ] Mapear colunas, preenchimento e tipos de dados da planilha.
