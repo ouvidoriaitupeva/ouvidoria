@@ -1,5 +1,17 @@
 # Atualização — Ouvidoria de Itupeva
 
+## SIC, Ouvidoria institucional e configurações
+
+- [x] Consultar a página oficial da Ouvidoria de Itupeva.
+- [x] Criar página Cadastro do SIC conforme a LAI.
+- [x] Adicionar Cadastro do SIC ao menu.
+- [x] Criar página institucional da Ouvidoria baseada na referência oficial.
+- [x] Criar página Configurações e mover o aviso da fonte local para ela.
+- [x] Remover as colunas fixas de status e fazer os filtros controlarem os dados exibidos.
+- [x] Validar rotas, formulário e responsividade.
+- [ ] Salvar checkpoint.
+
+
 ## Filtros de status
 
 - [ ] Padronizar opções: Concluídos, Abertos e Registrados.
