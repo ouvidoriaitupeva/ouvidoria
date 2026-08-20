@@ -1,5 +1,14 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Dentro do prazo — proxy transparente
+
+- [ ] Calcular concluídos sem prorrogação ÷ concluídos.
+- [ ] Aplicar o cálculo ao fallback e ao upload local do XLSX.
+- [ ] Exibir o rótulo “Sem prorrogação” no card.
+- [ ] Informar que o valor não substitui o SLA oficial.
+- [ ] Validar e salvar checkpoint.
+
+
 ## Resolutividade e prazo
 
 - [ ] Calcular Índice de resolutividade como concluídos ÷ protocolos registrados.

@@ -32,7 +32,7 @@ sheet = workbook['Dados']
 headers = [cell.value for cell in next(sheet.iter_rows(values_only=False))]
 index = {name: position for position, name in enumerate(headers)}
 
-daily = defaultdict(lambda: {'f': 0, 'fab': 0, 'fcc': 0, 'fcn': 0, 'cat': Counter()})
+daily = defaultdict(lambda: {'f': 0, 'fab': 0, 'fcc': 0, 'fcn': 0, 'fcp': 0, 'cat': Counter()})
 monthly_secretariat = defaultdict(lambda: defaultdict(lambda: {'reg': 0, 'ab': 0, 'cc': 0}))
 monthly_subject = defaultdict(Counter)
 secretariat_totals = Counter()
@@ -64,6 +64,8 @@ for row in sheet.iter_rows(min_row=2, values_only=True):
     subject_totals[subject] += 1
     if status == 'Concluído':
         metrics['fcc'] += 1
+        if str(clean(row[index['Prorrogado']]) or '').lower() != 'sim':
+            metrics['fcp'] += 1
         monthly_secretariat[month][secretariat]['cc'] += 1
         if not finalized:
             quality['concluidos_sem_data_finalizacao'] += 1
@@ -87,7 +89,7 @@ subject_index = {name: pos for pos, name in enumerate(subjects)}
 serialized_daily = {}
 for day, values in sorted(daily.items()):
     serialized_daily[day] = {
-        'f': values['f'], 'fab': values['fab'], 'fcc': values['fcc'], 'fcn': values['fcn'],
+        'f': values['f'], 'fab': values['fab'], 'fcc': values['fcc'], 'fcn': values['fcn'], 'fcp': values['fcp'],
         'cat': [values['cat'][category] for category in categories]
     }
 
