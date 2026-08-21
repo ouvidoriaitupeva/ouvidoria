@@ -1,9 +1,17 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Redesign da Carta de Serviços
+- [ ] Avaliar a estrutura visual atual e identificar pontos de confusão.
+- [ ] Reduzir o tamanho visual de títulos, cartões e blocos.
+- [ ] Reorganizar busca, filtro por secretaria e lista de serviços.
+- [ ] Melhorar a leitura dos detalhes de cada serviço.
+- [ ] Validar desktop e mobile e publicar novo checkpoint.
+
+
 ## Relatórios e acesso Online
-- [ ] Usar nos Relatórios por secretaria os mesmos períodos da Visão geral.
-- [ ] Fazer “Online — Portal eOuve” abrir a página Registrar Ouvidoria.
-- [ ] Validar filtros, link e publicar novo checkpoint.
+- [x] Usar nos Relatórios por secretaria os mesmos períodos da Visão geral.
+- [x] Fazer “Online — Portal eOuve” abrir a página Registrar Ouvidoria.
+- [x] Validar filtros, link e publicar novo checkpoint.
 
 
 ## Correção do tempo médio geral
