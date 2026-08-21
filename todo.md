@@ -1,13 +1,18 @@
 # Atualização — Ouvidoria de Itupeva
 
-## Ajuste de nomenclatura dos registros
-- [ ] Deixar “Tempo médio de resposta” sem dados na Visão geral.
-- [ ] Renomear a página para “Registrar pedido de Ouvidoria”.
-- [ ] Atualizar a descrição para “Registre sua manifestação ou acompanhe o andamento com o protocolo.”
-- [ ] Renomear a página SIC para “Registrar pedido de acesso à informação SIC”.
-- [ ] Atualizar a descrição do SIC para “Registre sua solicitação ou acompanhe o andamento com o protocolo.”
-- [ ] Renomear o menu para “Registrar Ouvidoria” e “Solicitar Informação SIC”.
+## Correção do tempo médio geral
+- [ ] Restaurar o valor do cartão “Tempo médio de resposta” geral.
+- [ ] Manter o cálculo conforme 12 meses, 6 meses, mês e período personalizado.
 - [ ] Validar e publicar novo checkpoint.
+
+## Ajuste de nomenclatura dos registros
+- [x] Deixar “Tempo médio de resposta” sem dados na Visão geral.
+- [x] Renomear a página para “Registrar pedido de Ouvidoria”.
+- [x] Atualizar a descrição para “Registre sua manifestação ou acompanhe o andamento com o protocolo.”
+- [x] Renomear a página SIC para “Registrar pedido de acesso à informação SIC”.
+- [x] Atualizar a descrição do SIC para “Registre sua solicitação ou acompanhe o andamento com o protocolo.”
+- [x] Renomear o menu para “Registrar Ouvidoria” e “Solicitar Informação SIC”.
+- [x] Validar e publicar novo checkpoint.
 
 
 ## Correção da página Relatórios por secretaria
