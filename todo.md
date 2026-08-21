@@ -1,5 +1,12 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Quantidades nos percentuais e nomes dos rankings
+- [x] Exibir quantidade absoluta em cinza e menor junto de cada percentual na Visão geral.
+- [x] Renomear Desempenho por secretaria para Ranking das secretarias.
+- [x] Renomear Assuntos para Ranking dos Assuntos.
+- [x] Validar e publicar novo checkpoint.
+
+
 ## Ajustes em relatórios e acompanhamento do SIC
 - [x] Remover a etiqueta “Dados agregados” de todos os cartões de Relatórios por secretaria.
 - [x] Adicionar no SIC o bloco Acompanhar pedido com protocolo e botão Consultar, igual ao Registrar manifestação.
