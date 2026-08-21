@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Tempo médio real de resposta
+- [x] Inspecionar a planilha original para localizar datas de recebimento e conclusão/resposta.
+- [x] Calcular o tempo médio real do período, sem usar valores fictícios.
+- [x] Exibir tempo médio em Tipos de manifestação.
+- [x] Exibir tempo médio no Ranking das secretarias.
+- [x] Exibir tempo médio no Ranking dos Assuntos.
+- [x] Atualizar o cartão geral com o valor real do período.
+- [x] Validar e publicar novo checkpoint.
+
+
 ## Barras e tempo médio de resposta
 - [x] Adicionar barras de progresso ao Ranking das secretarias.
 - [x] Incluir tempo médio de resposta no Ranking dos Assuntos.
