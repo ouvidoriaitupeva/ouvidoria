@@ -1,5 +1,12 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Remoção da página Secretarias
+- [x] Retirar Secretarias do menu lateral.
+- [x] Remover a rota acessível da página Secretarias.
+- [x] Preservar rankings das secretarias na Visão geral e nos Relatórios.
+- [x] Validar navegação e publicar novo checkpoint.
+
+
 ## Quantidades nos percentuais e nomes dos rankings
 - [x] Exibir quantidade absoluta em cinza e menor junto de cada percentual na Visão geral.
 - [x] Renomear Desempenho por secretaria para Ranking das secretarias.
