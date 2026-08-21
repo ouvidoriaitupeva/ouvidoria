@@ -1,5 +1,13 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Barras e tempo médio de resposta
+- [x] Adicionar barras de progresso ao Ranking das secretarias.
+- [x] Incluir tempo médio de resposta no Ranking dos Assuntos.
+- [x] Criar cartão “Tempo médio de resposta” com o valor geral do período, se existir na fonte.
+- [x] Manter o cartão visível e sem valor quando a métrica não estiver disponível, sem inventar dados.
+- [x] Validar e publicar novo checkpoint.
+
+
 ## Remoção da página Secretarias
 - [x] Retirar Secretarias do menu lateral.
 - [x] Remover a rota acessível da página Secretarias.
