@@ -1,11 +1,18 @@
 # Atualização — Ouvidoria de Itupeva
 
-## Simplificação final da Carta de Serviços
-- [ ] Remover “necessários” da descrição da busca.
-- [ ] Remover o aviso “Versão inicial. Validação pelos órgãos responsáveis.”.
-- [ ] Remover a faixa “Como encontrar o que você precisa” e seus passos.
-- [ ] Evitar repetir “Secretaria” nos blocos de Gabinete — Defesa Civil e Gabinete — Ouvidoria.
+## Agrupamento do Gabinete na Carta de Serviços
+- [ ] Criar um único banner para a área Gabinete.
+- [ ] Colocar Defesa Civil e Ouvidoria dentro desse banner.
+- [ ] Preservar setores, serviços, busca e detalhes expansíveis.
 - [ ] Validar e publicar novo checkpoint.
+
+
+## Simplificação final da Carta de Serviços
+- [x] Remover “necessários” da descrição da busca.
+- [x] Remover o aviso “Versão inicial. Validação pelos órgãos responsáveis.”.
+- [x] Remover a faixa “Como encontrar o que você precisa” e seus passos.
+- [x] Evitar repetir “Secretaria” nos blocos de Gabinete — Defesa Civil e Gabinete — Ouvidoria.
+- [x] Validar e publicar novo checkpoint.
 
 
 ## Redesign da Carta de Serviços
