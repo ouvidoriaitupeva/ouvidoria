@@ -1,11 +1,27 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Ajuste de nomenclatura dos registros
+- [ ] Deixar “Tempo médio de resposta” sem dados na Visão geral.
+- [ ] Renomear a página para “Registrar pedido de Ouvidoria”.
+- [ ] Atualizar a descrição para “Registre sua manifestação ou acompanhe o andamento com o protocolo.”
+- [ ] Renomear a página SIC para “Registrar pedido de acesso à informação SIC”.
+- [ ] Atualizar a descrição do SIC para “Registre sua solicitação ou acompanhe o andamento com o protocolo.”
+- [ ] Renomear o menu para “Registrar Ouvidoria” e “Solicitar Informação SIC”.
+- [ ] Validar e publicar novo checkpoint.
+
+
 ## Correção da página Relatórios por secretaria
 - [x] Conectar a rota /relatorios ao componente de relatórios.
 - [x] Preservar todas as secretarias, filtros, barras e tempo médio.
 - [x] Validar menu, rota e visualização da página.
 - [x] Publicar novo checkpoint.
 
+
+## Entrega pendente do PDF técnico revisado
+- [x] Reaplicar a revisão funcional com integrações via API do Fala.BR.
+- [x] Confirmar remoção de tecnologias específicas, Painel Resolveu?, Configurações e planilha.
+- [x] Compilar e verificar o PDF.
+- [x] Entregar o PDF atualizado ao usuário.
 
 ## Revisão do documento técnico para integração via API
 - [ ] Remover do PDF referências a tecnologias específicas.

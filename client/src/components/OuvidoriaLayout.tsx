@@ -5,8 +5,8 @@ import { BarChart3, CircleHelp, FileBarChart, FileText, Info, LayoutDashboard, M
 
 const items = [
   { href: "/", label: "Visão geral", icon: LayoutDashboard },
-  { href: "/registro", label: "Registrar manifestação", icon: Plus },
-  { href: "/sic", label: "Cadastrar pedido SIC", icon: Plus },
+  { href: "/registro", label: "Registrar Ouvidoria", icon: Plus },
+  { href: "/sic", label: "Solicitar Informação SIC", icon: Plus },
   { href: "/relatorios", label: "Relatórios por secretaria", icon: FileBarChart },
 ];
 
