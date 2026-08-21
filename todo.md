@@ -1,5 +1,11 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Ajustes em relatórios e acompanhamento do SIC
+- [x] Remover a etiqueta “Dados agregados” de todos os cartões de Relatórios por secretaria.
+- [x] Adicionar no SIC o bloco Acompanhar pedido com protocolo e botão Consultar, igual ao Registrar manifestação.
+- [x] Validar e publicar novo checkpoint.
+
+
 ## Ajustes de simplificação e organização
 - [x] Simplificar o texto principal da Visão geral.
 - [x] Fazer Assuntos mostrar apenas a coluna do filtro selecionado.
