@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Ajustes de simplificação e organização
+- [x] Simplificar o texto principal da Visão geral.
+- [x] Fazer Assuntos mostrar apenas a coluna do filtro selecionado.
+- [x] Retirar “Enviar uma nova solicitação” do bloco inicial do SIC.
+- [x] Colocar todos os serviços de cada departamento no mesmo banner da secretaria na Carta de Serviços.
+- [x] Remover o responsável nominal pela Ouvidoria e SIC da página institucional.
+- [x] Remover a frase sobre conteúdo consultado no portal oficial.
+- [x] Validar e publicar novo checkpoint.
+
+
 ## Correções de fluxo, relatórios e Carta de Serviços
 - [x] Adicionar campo para acompanhar pedido em Registrar manifestação.
 - [x] Remover os textos introdutórios solicitados de Registrar manifestação.
