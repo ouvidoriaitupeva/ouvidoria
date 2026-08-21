@@ -1,5 +1,15 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Auditoria do tempo médio
+- [x] Conferir período efetivamente usado no cálculo.
+- [x] Conferir datas mínima e máxima de recebimento e finalização.
+- [x] Conferir registros incluídos, finalizados e média recalculada.
+- [x] Comparar o agregado salvo com o filtro da Visão geral.
+- [x] Corrigir a regra se houver divergência e publicar a conclusão.
+- [x] Corrigir o tratamento de formatos distintos em “Recebido em” e “Finalizado em”.
+- [x] Fazer o tempo médio acompanhar 12 meses, 6 meses, mês e período personalizado.
+
+
 ## Tempo médio real de resposta
 - [x] Inspecionar a planilha original para localizar datas de recebimento e conclusão/resposta.
 - [x] Calcular o tempo médio real do período, sem usar valores fictícios.
