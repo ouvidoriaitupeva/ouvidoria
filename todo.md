@@ -1,5 +1,11 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Relatórios e acesso Online
+- [ ] Usar nos Relatórios por secretaria os mesmos períodos da Visão geral.
+- [ ] Fazer “Online — Portal eOuve” abrir a página Registrar Ouvidoria.
+- [ ] Validar filtros, link e publicar novo checkpoint.
+
+
 ## Correção do tempo médio geral
 - [ ] Restaurar o valor do cartão “Tempo médio de resposta” geral.
 - [ ] Manter o cálculo conforme 12 meses, 6 meses, mês e período personalizado.
