@@ -1,10 +1,17 @@
 # Atualização — Ouvidoria de Itupeva
 
-## Agrupamento do Gabinete na Carta de Serviços
-- [ ] Criar um único banner para a área Gabinete.
-- [ ] Colocar Defesa Civil e Ouvidoria dentro desse banner.
-- [ ] Preservar setores, serviços, busca e detalhes expansíveis.
+## Ajuste final do banner Gabinete
+- [ ] Exibir “Secretaria” e “Gabinete” no cabeçalho do banner.
+- [ ] Remover “Conteúdo integral da versão anexada”.
+- [ ] Remover o aviso de validação do rodapé.
 - [ ] Validar e publicar novo checkpoint.
+
+
+## Agrupamento do Gabinete na Carta de Serviços
+- [x] Criar um único banner para a área Gabinete.
+- [x] Colocar Defesa Civil e Ouvidoria dentro desse banner.
+- [x] Preservar setores, serviços, busca e detalhes expansíveis.
+- [x] Validar e publicar novo checkpoint.
 
 
 ## Simplificação final da Carta de Serviços
