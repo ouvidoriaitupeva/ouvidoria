@@ -1,5 +1,39 @@
 # Atualização — Ouvidoria de Itupeva
 
+## Correção da página Relatórios por secretaria
+- [x] Conectar a rota /relatorios ao componente de relatórios.
+- [x] Preservar todas as secretarias, filtros, barras e tempo médio.
+- [x] Validar menu, rota e visualização da página.
+- [x] Publicar novo checkpoint.
+
+
+## Revisão do documento técnico para integração via API
+- [ ] Remover do PDF referências a tecnologias específicas.
+- [ ] Remover Painel Resolveu? e Configurações do escopo documentado.
+- [ ] Remover recebimento e processamento por planilha.
+- [ ] Descrever dados, consultas e integrações via API do Fala.BR e serviços institucionais.
+- [ ] Manter somente a descrição funcional do que a solução faz.
+- [ ] Gerar, revisar e entregar PDF atualizado.
+
+## Documento técnico para o setor de TI
+- [x] Reorientar o documento de RH para TI.
+- [x] Documentar arquitetura, stack, hospedagem, deploy e rotas.
+- [x] Documentar modelo de dados, processamento local e agregação.
+- [x] Documentar segurança, privacidade, LGPD, backup e controle de acesso.
+- [x] Documentar requisitos operacionais, manutenção, monitoramento e suporte.
+- [x] Redigir recomendações técnicas e critérios de aceite.
+- [x] Gerar, revisar e entregar PDF técnico.
+
+## Documento formal para o RH
+- [ ] Estruturar justificativa institucional e objetivo do projeto.
+- [ ] Documentar escopo funcional: painel, manifestação, SIC, acompanhamento, relatórios e Carta de Serviços.
+- [ ] Documentar privacidade, processamento local da planilha e anonimização agregada.
+- [ ] Documentar indicadores, regras de cálculo e correção do tempo médio.
+- [ ] Documentar requisitos de infraestrutura, dados, governança, segurança e manutenção.
+- [ ] Redigir recomendações de implantação e encaminhamentos ao RH.
+- [ ] Gerar, revisar e entregar PDF.
+
+
 ## Auditoria do tempo médio
 - [x] Conferir período efetivamente usado no cálculo.
 - [x] Conferir datas mínima e máxima de recebimento e finalização.
