@@ -5,19 +5,22 @@ import OuvidoriaLayout from "@/components/OuvidoriaLayout";
 import { BarChart3, Check, Clock3, Target } from "lucide-react";
 
 type DailyRow = { f?: number; fab?: number; fcc?: number; fcn?: number; fcp?: number; cat?: number[]; ass?: number[]; assC?: number[]; assA?: number[] };
-type Metrics = { meta?: { gerado_em?: string; janela_inicio?: string; janela_fim?: string; categorias?: string[]; secretarias?: string[]; assuntos?: string[]; fonte?: string }; diario?: Record<string, DailyRow>; mensal_dim?: Record<string, { sec?: { reg?: number[]; cc?: number[] }; ass?: { reg?: number[] } }>; abertos_mais_30d?: { total?: number }; tempo_medio?: { geral?: number | null; categorias?: (number | null)[]; secretarias?: (number | null)[]; assuntos?: (number | null)[]; diario?: Record<string, { geral?: number | null; geral_count?: number; categorias?: (number | null)[]; categorias_count?: number[]; secretarias?: (number | null)[]; secretarias_count?: number[]; assuntos?: (number | null)[]; assuntos_count?: number[] }>; mensal?: Record<string, { geral?: number | null; geral_count?: number; categorias?: (number | null)[]; categorias_count?: number[]; secretarias?: (number | null)[]; secretarias_count?: number[]; assuntos?: (number | null)[]; assuntos_count?: number[] }> } };
+type Metrics = { meta?: { gerado_em?: string; janela_inicio?: string; janela_fim?: string; categorias?: string[]; secretarias?: string[]; assuntos?: string[]; fonte?: string }; diario?: Record<string, DailyRow>; mensal_dim?: Record<string, { sec?: { reg?: number[]; cc?: number[] }; ass?: { reg?: number[] } }>; abertos_mais_30d?: { total?: number }; tempo_medio?: { geral?: number | null; categorias?: (number | null)[]; secretarias?: (number | null)[]; assuntos?: (number | null)[]; base?: string; registros_no_periodo?: number; registros_finalizados_com_tempo?: number; diario?: Record<string, { geral?: number | null; geral_count?: number; categorias?: (number | null)[]; categorias_count?: number[]; secretarias?: (number | null)[]; secretarias_count?: number[]; assuntos?: (number | null)[]; assuntos_count?: number[] }>; mensal?: Record<string, { geral?: number | null; geral_count?: number; categorias?: (number | null)[]; categorias_count?: number[]; secretarias?: (number | null)[]; secretarias_count?: number[]; assuntos?: (number | null)[]; assuntos_count?: number[] }> } };
 type SheetRow = Record<string, unknown>;
 
 const colors = ["#00549D", "#0A8F4D", "#D94736", "#F0C433", "#35A8C6", "#7B6BB2", "#D78B1D", "#7B8A91"];
 const categoryOrder = ["Reclamação", "Solicitação", "Denúncia", "Informação", "Elogio", "Sugestão", "Doação", "Simplifique"];
 const sourceStart = new Date("2021-08-01T00:00:00");
 function clean(value: unknown) { return typeof value === "string" ? value.trim() : value; }
-function parseSheetDate(value: unknown) {
+type TimeBucket = { sum: number; count: number };
+function addTime(bucket: TimeBucket, days: number) { bucket.sum += days; bucket.count += 1; }
+function averageTime(bucket?: TimeBucket) { return bucket && bucket.count ? Number((bucket.sum / bucket.count).toFixed(2)) : null; }
+function parseSheetDate(value: unknown, format: "received" | "finalized" = "received") {
   if (value instanceof Date && !Number.isNaN(value.getTime())) return value;
   if (typeof value === "number") return new Date(Date.UTC(1899, 11, 30 + value));
   if (typeof value === "string") {
     const match = value.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2}):(\d{2}))?/);
-    if (match) return new Date(Date.UTC(Number(match[3]), Number(match[2]) - 1, Number(match[1]), Number(match[4] || 0), Number(match[5] || 0), Number(match[6] || 0)));
+    if (match) { const first = Number(match[1]); const second = Number(match[2]); const rawYear = Number(match[3]); const year = rawYear < 100 ? 2000 + rawYear : rawYear; const monthFirst = format === "finalized" && first <= 12; const day = monthFirst ? second : first; const month = monthFirst ? first : second; return new Date(Date.UTC(year, month - 1, day, Number(match[4] || 0), Number(match[5] || 0), Number(match[6] || 0))); }
     const parsed = new Date(value);
     if (!Number.isNaN(parsed.getTime())) return parsed;
   }
@@ -35,6 +38,14 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
   const monthlySubjects: Record<string, Record<string, number>> = {};
   const secretariatTotals: Record<string, number> = {};
   const subjectTotals: Record<string, number> = {};
+  const overallTime: TimeBucket = { sum: 0, count: 0 };
+  const categoryTime: Record<string, TimeBucket> = {};
+  const secretariatTime: Record<string, TimeBucket> = {};
+  const subjectTime: Record<string, TimeBucket> = {};
+  const dailyTime: Record<string, { total: TimeBucket; categorias: Record<string, TimeBucket>; secretarias: Record<string, TimeBucket>; assuntos: Record<string, TimeBucket> }> = {};
+  const monthlyTime: Record<string, { total: TimeBucket; categorias: Record<string, TimeBucket>; secretarias: Record<string, TimeBucket>; assuntos: Record<string, TimeBucket> }> = {};
+  let eligibleForTime = 0;
+  let finalizedForTime = 0;
   let latest: Date | null = null;
   for (const row of rows) {
     const received = parseSheetDate(row["Recebido em"]);
@@ -45,6 +56,27 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
     const category = String(clean(row.Categoria) || "Não informado");
     const secretariat = String(clean(row.Secretaria) || "Não informado");
     const subject = String(clean(row.Assunto) || "Não informado");
+    const finished = parseSheetDate(row["Finalizado em"], "finalized");
+    if (finished && finished >= received) {
+      eligibleForTime += 1;
+      const days = (finished.getTime() - received.getTime()) / 86400000;
+      finalizedForTime += 1;
+      addTime(overallTime, days);
+      if (!categoryTime[category]) categoryTime[category] = { sum: 0, count: 0 };
+      if (!secretariatTime[secretariat]) secretariatTime[secretariat] = { sum: 0, count: 0 };
+      if (!subjectTime[subject]) subjectTime[subject] = { sum: 0, count: 0 };
+      addTime(categoryTime[category], days);
+      addTime(secretariatTime[secretariat], days);
+      addTime(subjectTime[subject], days);
+      if (!dailyTime[day]) dailyTime[day] = { total: { sum: 0, count: 0 }, categorias: {}, secretarias: {}, assuntos: {} };
+      if (!monthlyTime[month]) monthlyTime[month] = { total: { sum: 0, count: 0 }, categorias: {}, secretarias: {}, assuntos: {} };
+      addTime(dailyTime[day].total, days);
+      addTime(monthlyTime[month].total, days);
+      for (const [map, name] of [[dailyTime[day].categorias, category], [dailyTime[day].secretarias, secretariat], [dailyTime[day].assuntos, subject], [monthlyTime[month].categorias, category], [monthlyTime[month].secretarias, secretariat], [monthlyTime[month].assuntos, subject]] as const) {
+        if (!map[name]) map[name] = { sum: 0, count: 0 };
+        addTime(map[name], days);
+      }
+    }
     if (!latest || received.getTime() > latest.getTime()) latest = received;
     if (!daily[day]) daily[day] = { f: 0, fab: 0, fcc: 0, fcn: 0, cat: [], ass: [], _categories: {}, _subjects: {}, _subjectC: {}, _subjectA: {} };
     const item = daily[day];
@@ -74,9 +106,11 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
   for (const month of Object.keys(monthlySecretariat)) {
     monthlyDim![month] = { sec: { reg: secretariats.map((name) => monthlySecretariat[month][name]?.reg || 0), cc: secretariats.map((name) => monthlySecretariat[month][name]?.cc || 0) }, ass: { reg: subjects.map((name) => monthlySubjects[month]?.[name] || 0) } };
   }
+  const serializedDailyTime = Object.fromEntries(Object.entries(dailyTime).map(([day, entry]) => [day, { geral: averageTime(entry.total), geral_count: entry.total.count, categorias: categories.map((name) => averageTime(entry.categorias[name])), categorias_count: categories.map((name) => entry.categorias[name]?.count || 0), secretarias: secretariats.map((name) => averageTime(entry.secretarias[name])), secretarias_count: secretariats.map((name) => entry.secretarias[name]?.count || 0), assuntos: subjects.map((name) => averageTime(entry.assuntos[name])), assuntos_count: subjects.map((name) => entry.assuntos[name]?.count || 0) }]));
+  const serializedMonthlyTime = Object.fromEntries(Object.entries(monthlyTime).map(([month, entry]) => [month, { geral: averageTime(entry.total), geral_count: entry.total.count, categorias: categories.map((name) => averageTime(entry.categorias[name])), categorias_count: categories.map((name) => entry.categorias[name]?.count || 0), secretarias: secretariats.map((name) => averageTime(entry.secretarias[name])), secretarias_count: secretariats.map((name) => entry.secretarias[name]?.count || 0), assuntos: subjects.map((name) => averageTime(entry.assuntos[name])), assuntos_count: subjects.map((name) => entry.assuntos[name]?.count || 0) }]));
   const cutoff = latest ? new Date(latest.getTime() - 30 * 86400000) : null;
   const openOver30 = Object.entries(serializedDaily).filter(([day]) => cutoff && new Date(`${day}T00:00:00`) <= cutoff).reduce((sum, [, row]) => sum + Number(row.fab || 0), 0);
-  return { meta: { gerado_em: latest ? isoDate(latest) : undefined, janela_inicio: isoDate(sourceStart), janela_fim: latest ? isoDate(latest) : undefined, categorias: categories, secretarias: secretariats, assuntos: subjects, fonte: "Planilha carregada localmente no navegador" }, diario: serializedDaily, mensal_dim: monthlyDim, abertos_mais_30d: { total: openOver30 } };
+  return { meta: { gerado_em: latest ? isoDate(latest) : undefined, janela_inicio: isoDate(sourceStart), janela_fim: latest ? isoDate(latest) : undefined, categorias: categories, secretarias: secretariats, assuntos: subjects, fonte: "Planilha carregada localmente no navegador" }, diario: serializedDaily, mensal_dim: monthlyDim, abertos_mais_30d: { total: openOver30 }, tempo_medio: { geral: averageTime(overallTime), categorias: categories.map((name) => averageTime(categoryTime[name])), secretarias: secretariats.map((name) => averageTime(secretariatTime[name])), assuntos: subjects.map((name) => averageTime(subjectTime[name])), base: "Dias corridos entre Recebido em e Finalizado em", registros_no_periodo: eligibleForTime, registros_finalizados_com_tempo: finalizedForTime, diario: serializedDailyTime, mensal: serializedMonthlyTime } };
 }
 
 export default function Home() {
