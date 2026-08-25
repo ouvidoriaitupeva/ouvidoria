@@ -48,6 +48,11 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
   let finalizedForTime = 0;
   let latest: Date | null = null;
   for (const row of rows) {
+    const candidate = parseSheetDate(row["Recebido em"]);
+    if (candidate && candidate >= sourceStart && (!latest || candidate.getTime() > latest.getTime())) latest = candidate;
+  }
+  const overdueCutoff = latest ? new Date(latest.getTime() - 30 * 86400000) : null;
+  for (const row of rows) {
     const received = parseSheetDate(row["Recebido em"]);
     if (!received || received < sourceStart) continue;
     const day = isoDate(received);
@@ -57,6 +62,7 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
     const secretariat = String(clean(row.Secretaria) || "Não informado");
     const subject = String(clean(row.Assunto) || "Não informado");
     const finished = parseSheetDate(row["Finalizado em"], "finalized");
+    const isOverdueOpen = Boolean(overdueCutoff && received < overdueCutoff && status !== "Concluído" && status !== "Cancelado");
     let responseDays: number | null = null;
     if (finished && finished >= received) {
       eligibleForTime += 1;
@@ -93,7 +99,8 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
     if (!monthlySecretariat[month]) monthlySecretariat[month] = {};
     if (!monthlySecretariat[month][secretariat]) monthlySecretariat[month][secretariat] = { reg: 0, cc: 0, within: 0, outside: 0 };
     monthlySecretariat[month][secretariat].reg += 1;
-    if (status === "Concluído" && responseDays != null) { monthlySecretariat[month][secretariat].cc += 1; if (responseDays > 30) monthlySecretariat[month][secretariat].outside += 1; else monthlySecretariat[month][secretariat].within += 1; } else if (status === "Concluído") { monthlySecretariat[month][secretariat].cc += 1; }
+    if (status === "Concluído") monthlySecretariat[month][secretariat].cc += 1;
+    if (isOverdueOpen) monthlySecretariat[month][secretariat].outside += 1;
     if (!monthlySubjects[month]) monthlySubjects[month] = {};
     monthlySubjects[month][subject] = Number(monthlySubjects[month][subject] || 0) + 1;
     secretariatTotals[secretariat] = Number(secretariatTotals[secretariat] || 0) + 1;
@@ -106,7 +113,7 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
   for (const [day, row] of Object.entries(daily)) serializedDaily[day] = { f: row.f, fab: row.fab, fcc: row.fcc, fcn: row.fcn, fcp: row.fcp, fco: row.fco, cat: categories.map((name) => Number(row._categories?.[name] || 0)), ass: subjects.map((name) => Number(row._subjects?.[name] || 0)), assC: subjects.map((name) => Number(row._subjectC?.[name] || 0)), assA: subjects.map((name) => Number(row._subjectA?.[name] || 0)) };
   const monthlyDim: Metrics["mensal_dim"] = {};
   for (const month of Object.keys(monthlySecretariat)) {
-    monthlyDim![month] = { sec: { reg: secretariats.map((name) => monthlySecretariat[month][name]?.reg || 0), cc: secretariats.map((name) => monthlySecretariat[month][name]?.cc || 0), within: secretariats.map((name) => monthlySecretariat[month][name]?.within || 0), outside: secretariats.map((name) => monthlySecretariat[month][name]?.outside || 0) }, ass: { reg: subjects.map((name) => monthlySubjects[month]?.[name] || 0) } };
+    monthlyDim![month] = { sec: { reg: secretariats.map((name) => monthlySecretariat[month][name]?.reg || 0), cc: secretariats.map((name) => monthlySecretariat[month][name]?.cc || 0), within: secretariats.map((name) => Math.max(0, (monthlySecretariat[month][name]?.reg || 0) - (monthlySecretariat[month][name]?.outside || 0))), outside: secretariats.map((name) => monthlySecretariat[month][name]?.outside || 0) }, ass: { reg: subjects.map((name) => monthlySubjects[month]?.[name] || 0) } };
   }
   const serializedDailyTime = Object.fromEntries(Object.entries(dailyTime).map(([day, entry]) => [day, { geral: averageTime(entry.total), geral_count: entry.total.count, categorias: categories.map((name) => averageTime(entry.categorias[name])), categorias_count: categories.map((name) => entry.categorias[name]?.count || 0), secretarias: secretariats.map((name) => averageTime(entry.secretarias[name])), secretarias_count: secretariats.map((name) => entry.secretarias[name]?.count || 0), assuntos: subjects.map((name) => averageTime(entry.assuntos[name])), assuntos_count: subjects.map((name) => entry.assuntos[name]?.count || 0) }]));
   const serializedMonthlyTime = Object.fromEntries(Object.entries(monthlyTime).map(([month, entry]) => [month, { geral: averageTime(entry.total), geral_count: entry.total.count, categorias: categories.map((name) => averageTime(entry.categorias[name])), categorias_count: categories.map((name) => entry.categorias[name]?.count || 0), secretarias: secretariats.map((name) => averageTime(entry.secretarias[name])), secretarias_count: secretariats.map((name) => entry.secretarias[name]?.count || 0), assuntos: subjects.map((name) => averageTime(entry.assuntos[name])), assuntos_count: subjects.map((name) => entry.assuntos[name]?.count || 0) }]));
