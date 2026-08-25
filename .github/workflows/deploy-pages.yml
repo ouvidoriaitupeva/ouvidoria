@@ -32,7 +32,13 @@ jobs:
       - name: Build static site
         run: pnpm exec vite build
       - name: Support direct routes on GitHub Pages
-        run: cp dist/public/index.html dist/public/404.html && touch dist/public/.nojekyll
+        run: |
+          cp dist/public/index.html dist/public/404.html
+          for route in registro sic relatorios ouvidoria carta-servicos configuracoes; do
+            mkdir -p "dist/public/$route"
+            cp dist/public/index.html "dist/public/$route/index.html"
+          done
+          touch dist/public/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
