@@ -1,7 +1,7 @@
 /* Design: roteamento municipal da Ouvidoria de Itupeva — cada item do menu possui uma página própria e uma rota de retorno clara. */
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Route, Switch } from "wouter";
+import { Route, Router as WouterRouter, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -12,5 +12,5 @@ import OuvidoriaPage from "./pages/OuvidoriaPage";
 import ConfiguracoesPage from "./pages/ConfiguracoesPage";
 import CartaServicosPage from "./pages/CartaServicosPage";
 
-function Router() { return <Switch><Route path="/" component={Home} /><Route path="/registro" component={RegistroPage} /><Route path="/sic" component={SicPage} /><Route path="/ouvidoria" component={OuvidoriaPage} /><Route path="/configuracoes" component={ConfiguracoesPage} /><Route path="/carta-servicos" component={CartaServicosPage} /><Route path="/relatorios" component={ReportsPage} /><Route component={NotFoundPage} /></Switch>; }
+function Router() { return <WouterRouter base={import.meta.env.BASE_URL}><Switch><Route path="/" component={Home} /><Route path="/registro" component={RegistroPage} /><Route path="/sic" component={SicPage} /><Route path="/ouvidoria" component={OuvidoriaPage} /><Route path="/configuracoes" component={ConfiguracoesPage} /><Route path="/carta-servicos" component={CartaServicosPage} /><Route path="/relatorios" component={ReportsPage} /><Route component={NotFoundPage} /></Switch></WouterRouter>; }
 export default function App() { return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster position="bottom-right" /><Router /></TooltipProvider></ThemeProvider></ErrorBoundary>; }
