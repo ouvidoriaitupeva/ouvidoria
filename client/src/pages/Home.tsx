@@ -4,7 +4,7 @@ import * as XLSX from "xlsx";
 import OuvidoriaLayout from "@/components/OuvidoriaLayout";
 import { BarChart3, Check, Clock3, Target } from "lucide-react";
 
-type DailyRow = { f?: number; fab?: number; fcc?: number; fcn?: number; fcp?: number; cat?: number[]; ass?: number[]; assC?: number[]; assA?: number[] };
+type DailyRow = { f?: number; fab?: number; fcc?: number; fcn?: number; fcp?: number; fco?: number; cat?: number[]; ass?: number[]; assC?: number[]; assA?: number[] };
 type Metrics = { meta?: { gerado_em?: string; janela_inicio?: string; janela_fim?: string; categorias?: string[]; secretarias?: string[]; assuntos?: string[]; fonte?: string }; diario?: Record<string, DailyRow>; mensal_dim?: Record<string, { sec?: { reg?: number[]; cc?: number[]; within?: number[]; outside?: number[] }; ass?: { reg?: number[] } }>; abertos_mais_30d?: { total?: number }; tempo_medio?: { geral?: number | null; categorias?: (number | null)[]; secretarias?: (number | null)[]; assuntos?: (number | null)[]; base?: string; registros_no_periodo?: number; registros_finalizados_com_tempo?: number; diario?: Record<string, { geral?: number | null; geral_count?: number; categorias?: (number | null)[]; categorias_count?: number[]; secretarias?: (number | null)[]; secretarias_count?: number[]; assuntos?: (number | null)[]; assuntos_count?: number[] }>; mensal?: Record<string, { geral?: number | null; geral_count?: number; categorias?: (number | null)[]; categorias_count?: number[]; secretarias?: (number | null)[]; secretarias_count?: number[]; assuntos?: (number | null)[]; assuntos_count?: number[] }> } };
 type SheetRow = Record<string, unknown>;
 
@@ -57,9 +57,11 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
     const secretariat = String(clean(row.Secretaria) || "Não informado");
     const subject = String(clean(row.Assunto) || "Não informado");
     const finished = parseSheetDate(row["Finalizado em"], "finalized");
+    let responseDays: number | null = null;
     if (finished && finished >= received) {
       eligibleForTime += 1;
       const days = (finished.getTime() - received.getTime()) / 86400000;
+      responseDays = days;
       finalizedForTime += 1;
       addTime(overallTime, days);
       if (!categoryTime[category]) categoryTime[category] = { sum: 0, count: 0 };
@@ -78,20 +80,20 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
       }
     }
     if (!latest || received.getTime() > latest.getTime()) latest = received;
-    if (!daily[day]) daily[day] = { f: 0, fab: 0, fcc: 0, fcn: 0, cat: [], ass: [], _categories: {}, _subjects: {}, _subjectC: {}, _subjectA: {} };
+    if (!daily[day]) daily[day] = { f: 0, fab: 0, fcc: 0, fcn: 0, fcp: 0, fco: 0, cat: [], ass: [], _categories: {}, _subjects: {}, _subjectC: {}, _subjectA: {} };
     const item = daily[day];
     item.f = Number(item.f || 0) + 1;
     item._categories![category] = Number(item._categories![category] || 0) + 1;
     item._subjects![subject] = Number(item._subjects![subject] || 0) + 1;
     if (status === "Concluído") item._subjectC![subject] = Number(item._subjectC![subject] || 0) + 1;
     else if (status !== "Cancelado") item._subjectA![subject] = Number(item._subjectA![subject] || 0) + 1;
-    if (status === "Concluído") { item.fcc = Number(item.fcc || 0) + 1; if (String(clean(row.Prorrogado) || "").toLowerCase() !== "sim") { item.fcp = Number(item.fcp || 0) + 1; } }
+    if (status === "Concluído") { item.fcc = Number(item.fcc || 0) + 1; if (responseDays != null) { if (responseDays > 30) item.fco = Number(item.fco || 0) + 1; else item.fcp = Number(item.fcp || 0) + 1; } }
     else if (status === "Cancelado") item.fcn = Number(item.fcn || 0) + 1;
     else item.fab = Number(item.fab || 0) + 1;
     if (!monthlySecretariat[month]) monthlySecretariat[month] = {};
     if (!monthlySecretariat[month][secretariat]) monthlySecretariat[month][secretariat] = { reg: 0, cc: 0, within: 0, outside: 0 };
     monthlySecretariat[month][secretariat].reg += 1;
-    if (status === "Concluído") { monthlySecretariat[month][secretariat].cc += 1; if (String(clean(row.Prorrogado) || "").toLowerCase() === "sim") monthlySecretariat[month][secretariat].outside += 1; else monthlySecretariat[month][secretariat].within += 1; }
+    if (status === "Concluído" && responseDays != null) { monthlySecretariat[month][secretariat].cc += 1; if (responseDays > 30) monthlySecretariat[month][secretariat].outside += 1; else monthlySecretariat[month][secretariat].within += 1; } else if (status === "Concluído") { monthlySecretariat[month][secretariat].cc += 1; }
     if (!monthlySubjects[month]) monthlySubjects[month] = {};
     monthlySubjects[month][subject] = Number(monthlySubjects[month][subject] || 0) + 1;
     secretariatTotals[secretariat] = Number(secretariatTotals[secretariat] || 0) + 1;
@@ -101,7 +103,7 @@ export function metricsFromSheet(rows: SheetRow[]): Metrics {
   const secretariats = Object.entries(secretariatTotals).sort((a, b) => b[1] - a[1]).map(([name]) => name);
   const subjects = Object.entries(subjectTotals).sort((a, b) => b[1] - a[1]).slice(0, 20).map(([name]) => name);
   const serializedDaily: Record<string, DailyRow> = {};
-  for (const [day, row] of Object.entries(daily)) serializedDaily[day] = { f: row.f, fab: row.fab, fcc: row.fcc, fcn: row.fcn, fcp: row.fcp, cat: categories.map((name) => Number(row._categories?.[name] || 0)), ass: subjects.map((name) => Number(row._subjects?.[name] || 0)), assC: subjects.map((name) => Number(row._subjectC?.[name] || 0)), assA: subjects.map((name) => Number(row._subjectA?.[name] || 0)) };
+  for (const [day, row] of Object.entries(daily)) serializedDaily[day] = { f: row.f, fab: row.fab, fcc: row.fcc, fcn: row.fcn, fcp: row.fcp, fco: row.fco, cat: categories.map((name) => Number(row._categories?.[name] || 0)), ass: subjects.map((name) => Number(row._subjects?.[name] || 0)), assC: subjects.map((name) => Number(row._subjectC?.[name] || 0)), assA: subjects.map((name) => Number(row._subjectA?.[name] || 0)) };
   const monthlyDim: Metrics["mensal_dim"] = {};
   for (const month of Object.keys(monthlySecretariat)) {
     monthlyDim![month] = { sec: { reg: secretariats.map((name) => monthlySecretariat[month][name]?.reg || 0), cc: secretariats.map((name) => monthlySecretariat[month][name]?.cc || 0), within: secretariats.map((name) => monthlySecretariat[month][name]?.within || 0), outside: secretariats.map((name) => monthlySecretariat[month][name]?.outside || 0) }, ass: { reg: subjects.map((name) => monthlySubjects[month]?.[name] || 0) } };
