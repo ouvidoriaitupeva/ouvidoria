@@ -32,7 +32,9 @@ export function ReportsPage() {
         const rows = names.map((name, index) => {
           const registered = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.reg?.[index] || 0), 0);
           const concluded = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.cc?.[index] || 0), 0);
-          const open = Math.max(0, registered - concluded);
+          const storedOpen = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.open?.[index] ?? 0), 0);
+          const hasOpenData = months.some((month) => Array.isArray(data.mensal_dim?.[month]?.sec?.open));
+          const open = hasOpenData ? storedOpen : Math.max(0, registered - concluded);
           const hasDeadlineData = months.some((month) => Array.isArray(data.mensal_dim?.[month]?.sec?.outside));
           const outside = hasDeadlineData ? months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.outside?.[index] || 0), 0) : null;
           return { name, registered, concluded, open, outside, resolution: registered ? (concluded / registered) * 100 : null };
