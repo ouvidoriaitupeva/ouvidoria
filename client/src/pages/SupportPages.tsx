@@ -18,21 +18,29 @@ export function ReportsPage() {
   const [end, setEnd] = useState("");
   const [metrics, setMetrics] = useState<ReportMetric[]>([]);
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + "metricas.json").then((response) => response.json()).then((data) => {
-      const names: string[] = data.meta?.secretarias || [];
-      const monthKeys = Object.keys(data.mensal_dim || {}).sort();
-      const latest = Object.keys(data.diario || {}).sort().at(-1) || `${monthKeys.at(-1) || ""}-28`;
-      const rangeStart = period === "Período personalizado" ? (start || latest) : period === "Últimos 6 meses" ? `${monthKeys.slice(-6)[0] || latest.slice(0, 7)}-01` : period === "Este mês" ? `${latest.slice(0, 7)}-01` : `${monthKeys.slice(-12)[0] || latest.slice(0, 7)}-01`;
-      const rangeEnd = period === "Período personalizado" ? (end || latest) : latest;
-      const months = monthKeys.filter((month) => month >= rangeStart.slice(0, 7) && month <= rangeEnd.slice(0, 7));
-      const rows = names.map((name, index) => {
-        const registered = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.reg?.[index] || 0), 0);
-        const concluded = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.cc?.[index] || 0), 0);
-        const open = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.ab?.[index] || 0), 0);
-        return { name, registered, concluded, open, resolution: registered ? (concluded / registered) * 100 : null };
-      });
-      setMetrics(rows);
-    }).catch(() => setMetrics([]));
+    let active = true;
+    const load = () => {
+      const saved = localStorage.getItem("falabr-metrics");
+      const request = saved ? Promise.resolve(JSON.parse(saved)) : fetch(import.meta.env.BASE_URL + "metricas.json").then((response) => response.json());
+      request.then((data) => {
+        const names: string[] = data.meta?.secretarias || [];
+        const monthKeys = Object.keys(data.mensal_dim || {}).sort();
+        const latest = Object.keys(data.diario || {}).sort().at(-1) || `${monthKeys.at(-1) || ""}-28`;
+        const rangeStart = period === "Período personalizado" ? (start || latest) : period === "Últimos 6 meses" ? `${monthKeys.slice(-6)[0] || latest.slice(0, 7)}-01` : period === "Este mês" ? `${latest.slice(0, 7)}-01` : `${monthKeys.slice(-12)[0] || latest.slice(0, 7)}-01`;
+        const rangeEnd = period === "Período personalizado" ? (end || latest) : latest;
+        const months = monthKeys.filter((month) => month >= rangeStart.slice(0, 7) && month <= rangeEnd.slice(0, 7));
+        const rows = names.map((name, index) => {
+          const registered = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.reg?.[index] || 0), 0);
+          const concluded = months.reduce((sum, month) => sum + Number(data.mensal_dim?.[month]?.sec?.cc?.[index] || 0), 0);
+          const open = Math.max(0, registered - concluded);
+          return { name, registered, concluded, open, resolution: registered ? (concluded / registered) * 100 : null };
+        });
+        if (active) setMetrics(rows);
+      }).catch(() => { if (active) setMetrics([]); });
+    };
+    load();
+    window.addEventListener("falabr-metrics-updated", load);
+    return () => { active = false; window.removeEventListener("falabr-metrics-updated", load); };
   }, [period, start, end]);
   return <OuvidoriaLayout><div className="mx-auto max-w-[1200px]"><PageTitle eyebrow="Relatórios" title="Relatórios por secretaria" description="" /><div className="mb-6 flex flex-col items-stretch justify-end gap-2 sm:items-end"><select value={period} onChange={(e) => setPeriod(e.target.value)} className="h-11 rounded-lg border border-[#DCE3E4] bg-white px-3 text-xs font-bold"><option>Últimos 12 meses</option><option>Últimos 6 meses</option><option>Este mês</option><option>Período personalizado</option></select>{period === "Período personalizado" && <div className="flex gap-2"><input type="date" value={start} onChange={(e) => setStart(e.target.value)} aria-label="Data inicial" className="h-9 rounded-lg border border-[#DCE3E4] bg-white px-2 text-xs" /><input type="date" value={end} onChange={(e) => setEnd(e.target.value)} aria-label="Data final" className="h-9 rounded-lg border border-[#DCE3E4] bg-white px-2 text-xs" /></div>}</div><div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{metrics.map((item) => <div key={item.name} className="rounded-2xl border border-[#E4DED2] bg-white/75 p-6 shadow-[0_8px_24px_rgba(23,59,94,0.04)]"><div className="flex items-start justify-between gap-3"><div><div className="text-xs font-bold uppercase tracking-widest text-[#71818B]">Secretaria</div><h2 className="mt-2 font-display text-2xl leading-tight">{item.name}</h2></div></div><div className="mt-6 grid grid-cols-3 gap-3"><div><div className="text-xs text-[#71818B]">Registrados</div><div className="mt-1 text-2xl font-extrabold text-[#00549D]">{item.registered.toLocaleString("pt-BR")}</div></div><div><div className="text-xs text-[#71818B]">Concluídos</div><div className="mt-1 text-2xl font-extrabold text-[#0A8F4D]">{item.concluded.toLocaleString("pt-BR")}</div></div><div><div className="text-xs text-[#71818B]">Abertos</div><div className="mt-1 text-2xl font-extrabold text-[#B87800]">{item.open.toLocaleString("pt-BR")}</div></div></div><div className="mt-5 border-t border-[#E4DED2] pt-4"><div className="text-xs text-[#71818B]">Índice de resolutividade</div><div className="mt-1 text-2xl font-extrabold">{item.resolution === null ? "—" : (item.resolution.toFixed(1).replace(".", ",") + "%")}</div></div><button onClick={() => alert("Relatório agregado de " + item.name)} className="mt-5 flex items-center gap-2 text-xs font-bold text-[#00549D]">Abrir visão resumida <ArrowRight size={14} /></button></div>)}</div>{metrics.length === 0 && <div className="rounded-2xl border border-dashed border-[#B8C8CE] bg-white/70 p-10 text-center text-sm text-[#71818B]">Carregando dados da fonte local…</div>}<div className="mt-7 flex justify-end"><ActionButton><Download size={16} /> Exportar relatório agregado</ActionButton></div></div></OuvidoriaLayout>; }
 

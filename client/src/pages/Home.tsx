@@ -29,7 +29,7 @@ function formatDays(value: number | null | undefined) { return typeof value === 
 function addMonths(date: Date, amount: number) { const copy = new Date(date); copy.setMonth(copy.getMonth() + amount); return copy; }
 function Card({ label, value, helper, icon: Icon, tone, disabled }: any) { const bg = disabled ? "bg-[#EEF0F1] text-[#7B858A]" : tone === "navy" ? "bg-[#173B5E] text-white" : tone === "mint" ? "bg-[#EAF4F2]" : tone === "cream" ? "bg-[#FFF8E8]" : "bg-white"; return <div className={`rounded-2xl p-5 shadow-[0_8px_24px_rgba(23,59,94,0.06)] ${bg}`}><div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-[0.15em] opacity-75">{label}<Icon size={19} /></div><div className="mt-5 font-display text-4xl">{value}</div><div className="mt-2 text-xs opacity-70">{helper}</div></div>; }
 
-function metricsFromSheet(rows: SheetRow[]): Metrics {
+export function metricsFromSheet(rows: SheetRow[]): Metrics {
   const daily: Record<string, DailyRow & { _categories?: Record<string, number>; _subjects?: Record<string, number>; _subjectC?: Record<string, number>; _subjectA?: Record<string, number> }> = {};
   const monthlySecretariat: Record<string, Record<string, { reg: number; cc: number }>> = {};
   const monthlySubjects: Record<string, Record<string, number>> = {};
@@ -87,7 +87,17 @@ export default function Home() {
   const [end, setEnd] = useState("");
   const [selectedSeries, setSelectedSeries] = useState<"Concluídos" | "Abertos" | "Registrados">("Registrados");
   const [selectedStatus, setSelectedStatus] = useState<"Concluídos" | "Abertos" | "Registrados">("Registrados");
-  useEffect(() => { fetch(`${import.meta.env.BASE_URL}metricas.json`).then((response) => { if (!response.ok) throw new Error("metricas.json"); return response.json(); }).then(setData).catch(() => setLoadError(true)); }, []);
+  useEffect(() => {
+    let active = true;
+    const load = () => {
+      const saved = localStorage.getItem("falabr-metrics");
+      if (saved) { try { setData(JSON.parse(saved)); setLoadError(false); return; } catch { localStorage.removeItem("falabr-metrics"); } }
+      fetch(`${import.meta.env.BASE_URL}metricas.json`).then((response) => { if (!response.ok) throw new Error("metricas.json"); return response.json(); }).then((value) => { if (active) setData(value); }).catch(() => { if (active) setLoadError(true); });
+    };
+    load();
+    window.addEventListener("falabr-metrics-updated", load);
+    return () => { active = false; window.removeEventListener("falabr-metrics-updated", load); };
+  }, []);
   const daily = data?.diario ?? {};
   const allDates = Object.keys(daily).sort();
   const latest = allDates[allDates.length - 1] ?? "";
