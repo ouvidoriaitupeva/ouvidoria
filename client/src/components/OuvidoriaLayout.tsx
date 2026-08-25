@@ -7,7 +7,7 @@ const items = [
   { href: "/", label: "Visão geral", icon: LayoutDashboard },
   { href: "/registro", label: "Registrar Ouvidoria", icon: Plus },
   { href: "/sic", label: "Solicitar Informação SIC", icon: Plus },
-  { href: "/relatorios", label: "Relatórios por secretaria", icon: FileBarChart },
+  { href: "/ouvidoria/relatorios", label: "Relatórios por secretaria", icon: FileBarChart },
 ];
 
 export default function OuvidoriaLayout({ children }: { children: ReactNode }) {
