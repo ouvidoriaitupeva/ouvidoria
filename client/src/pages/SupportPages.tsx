@@ -30,7 +30,7 @@ function reportValue(item: ReportMetric, key: ReportColumnKey) {
   if (key === "concluded") return item.concluded.toLocaleString("pt-BR");
   if (key === "open") return item.open.toLocaleString("pt-BR");
   if (key === "outside") return item.outside === null ? "Não disponível" : item.outside.toLocaleString("pt-BR");
-  if (key === "resolution") return "Não disponível";
+  if (key === "resolution") return item.resolution === null ? "Não disponível" : `${item.resolution.toFixed(1).replace(".", ",")}%`;
   if (key === "categories") return item.categories || "Não disponível";
   return item.time === null ? "Não disponível" : `${item.time.toFixed(1).replace(".", ",")} dias`;
 }
@@ -169,7 +169,7 @@ export function ReportsPage() {
             const count = entry?.secretarias_count?.[index] || 0;
             if (typeof average === "number" && count > 0) { timeSum += average * count; timeCount += count; }
           });
-          return { name, registered, concluded, open, outside, resolution: null, categories, time: timeCount ? timeSum / timeCount : null };
+          return { name, registered, concluded, open, outside, resolution: registered ? (concluded / registered) * 100 : null, categories, time: timeCount ? timeSum / timeCount : null };
         }).filter((row) => row.registered > 0);
         if (active) setMetrics(rows);
       }).catch(() => { if (active) setMetrics([]); });
